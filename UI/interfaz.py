@@ -1,5 +1,5 @@
 import os
-from API.cuenta import Cuenta
+from MODELO.cuenta import Cuenta
 
 class UI:
     def __init__(self):
