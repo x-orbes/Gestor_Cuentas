@@ -3,26 +3,25 @@ from API.cuenta import Cuenta
 
 class UI:
     def __init__(self):
-        self.cuenta_clientes = []
-        self.archivo_datos = "cuentas.txt"
-        self.SEPARADOR = ","
+        self._cuenta_clientes = []
+        self._archivo_datos = "cuentas.txt"
+        self._SEPARADOR = ","
         self.cargar_datos()
 
     def cargar_datos(self):
-        if os.path.exists(self.archivo_datos):
-            with open(self.archivo_datos, "r") as archivo:
+        if os.path.exists(self._archivo_datos):
+            with open(self._archivo_datos, "r") as archivo:
                 for linea in archivo:
                     linea = linea.strip()
                     if linea:
-                        datos = linea.split(self.SEPARADOR)
-                        # Posiciones: 0=numero, 1=documento, 2=nombre, 3=saldo
+                        datos = linea.split(self._SEPARADOR)
                         cuenta_recuperada = Cuenta(int(datos[0]), int(datos[1]), datos[2], float(datos[3]))
-                        self.cuenta_clientes.append(cuenta_recuperada)
+                        self._cuenta_clientes.append(cuenta_recuperada)
 
     def guardar_datos(self):
-        with open(self.archivo_datos, "w") as archivo:
-            for cuenta in self.cuenta_clientes:
-                linea = f"{cuenta.numero_cuenta}{self.SEPARADOR}{cuenta.documento_identidad}{self.SEPARADOR}{cuenta.nombre}{self.SEPARADOR}{cuenta.saldo}\n"
+        with open(self._archivo_datos, "w") as archivo:
+            for cuenta in self._cuenta_clientes:
+                linea = f"{cuenta.numero_cuenta}{self._SEPARADOR}{cuenta.documento_identidad}{self._SEPARADOR}{cuenta.nombre}{self._SEPARADOR}{cuenta.saldo}\n"
                 archivo.write(linea)
 
     def iniciar(self):
@@ -82,8 +81,8 @@ class UI:
         if not nombre:
             print("El nombre no puede estar vacío.")
             return
-        if self.SEPARADOR in nombre:
-            print(f"El nombre no puede contener el carácter '{self.SEPARADOR}'.")
+        if self._SEPARADOR in nombre:
+            print(f"El nombre no puede contener el carácter '{self._SEPARADOR}'.")
             return
 
         saldo = self.leer_decimal("Ingrese el saldo inicial: ")
@@ -93,12 +92,12 @@ class UI:
             print("El saldo inicial no puede ser negativo.")
             return
 
-        self.cuenta_clientes.append(Cuenta(numero, doc, nombre, saldo))
+        self._cuenta_clientes.append(Cuenta(numero, doc, nombre, saldo))
         self.guardar_datos()
         print("¡Cuenta creada y almacenada con éxito!")
 
     def buscar_cuenta(self, numero: int):
-        for cuenta in self.cuenta_clientes:
+        for cuenta in self._cuenta_clientes:
             if cuenta.numero_cuenta == numero:
                 return cuenta
         return None
@@ -131,9 +130,9 @@ class UI:
 
     def mostrar_todas_las_cuentas(self):
         print("\n--- LISTADO DE CUENTAS ---")
-        if not self.cuenta_clientes:
+        if not self._cuenta_clientes:
             print("No hay cuentas registradas en la lista.")
             return
             
-        for cuenta in self.cuenta_clientes:
+        for cuenta in self._cuenta_clientes:
             print(cuenta.mostrar_datos())
