@@ -1,2 +1,3 @@
 235,2443625,Juan Alvarez,800.0
 7505,1033369852,Ximena Orbes Arias,49480.0
+1510,123456789,Jose Oscar Gomez,83000.0

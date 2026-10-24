@@ -20,7 +20,7 @@ class Cuenta:
             self.saldo -= cantidad
             print(f"Retiro exitoso de ${cantidad:.2f}. Nuevo saldo: ${self.saldo:.2f}")
             return True
-        print("Fondos insuficientes para realizar el retiro.")
+        print(f"Fondos insuficientes para realizar el retiro. Tienes un saldo de ${self.saldo:.2f}.")
         return False
 
     def mostrar_datos(self):
