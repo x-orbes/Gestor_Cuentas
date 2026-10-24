@@ -5,7 +5,7 @@ class UI:
     def __init__(self):
         self.cuenta_clientes = []
         self.archivo_datos = "cuentas.txt"
-        self.SEPARADOR = ","  # Definición del separador
+        self.SEPARADOR = ","
         self.cargar_datos()
 
     def cargar_datos(self):
